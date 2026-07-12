@@ -1,8 +1,8 @@
 package com.prueba.backend.A_Domain.security;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Builder;
-import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -49,9 +49,9 @@ public class Users implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(Objects.isNull(role)) return null;
+        if (Objects.isNull(role)) return null;
 
-        if(Objects.isNull(role.getPermissions())) return null;
+        if (Objects.isNull(role.getPermissions())) return null;
 
         List<SimpleGrantedAuthority> authorities = role.getPermissions().stream()
                 .map(each -> each.getOperation().getName())
@@ -60,6 +60,16 @@ public class Users implements UserDetails {
         authorities.add(new SimpleGrantedAuthority("ROLE_" + this.role.getName()));
         return authorities;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
 
     @Override
     public @Nullable String getPassword() {
@@ -92,6 +102,10 @@ public class Users implements UserDetails {
     }
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setUsername(String username) {
