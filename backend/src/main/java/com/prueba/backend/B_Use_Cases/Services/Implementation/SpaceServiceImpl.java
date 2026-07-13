@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class SpaceService implements ISpaceService {
+public class SpaceServiceImpl implements ISpaceService {
     private final SpaceRepository spaceRepository;
 
     @Override
