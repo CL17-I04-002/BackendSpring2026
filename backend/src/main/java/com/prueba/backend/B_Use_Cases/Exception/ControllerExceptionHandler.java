@@ -26,6 +26,14 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
     }
 
+    @ExceptionHandler(OverlappingReservationException.class)
+    public ResponseEntity<Error> overlappingReservationException(OverlappingReservationException exception){
+        Error error = buildError("440", "Something happened wrong", "unfortunately something happened wrong, try again");
+        log.error("Error: {}", exception.getMessage());
+
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+    }
+
     private Error buildError(String code, String title, String detail){
         Error error = new Error();
         error.setCode(code);
