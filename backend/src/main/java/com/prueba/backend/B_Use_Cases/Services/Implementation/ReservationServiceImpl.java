@@ -4,8 +4,10 @@ import com.prueba.backend.A_Domain.business.Reservation;
 import com.prueba.backend.A_Domain.business.ReservationStatus;
 import com.prueba.backend.A_Domain.business.Space;
 import com.prueba.backend.A_Domain.security.Users;
+import com.prueba.backend.B_Use_Cases.Events.ReservationConfirmedEvent;
 import com.prueba.backend.B_Use_Cases.Exception.ObjectNotFoundException;
 import com.prueba.backend.B_Use_Cases.Exception.OverlappingReservationException;
+import com.prueba.backend.B_Use_Cases.Services.Interface.IPaymentService;
 import com.prueba.backend.B_Use_Cases.Services.Interface.IReservationService;
 import com.prueba.backend.B_Use_Cases.Services.dto.ReservationRequest;
 import com.prueba.backend.B_Use_Cases.Services.dto.ReservationResponse;
@@ -14,6 +16,7 @@ import com.prueba.backend.D_Infraestructure.repository.ReservationRepository;
 import com.prueba.backend.D_Infraestructure.repository.SpaceRepository;
 import com.prueba.backend.D_Infraestructure.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -33,6 +36,8 @@ public class ReservationServiceImpl implements IReservationService {
     private final ReservationMapper reservationMapper;
     private final SpaceRepository spaceRepository;
     private final UserRepository userRepository;
+    private final IPaymentService paymentService;
+    private ApplicationEventPublisher eventPublisher;
 
     @Override
     @Transactional
@@ -77,9 +82,21 @@ public class ReservationServiceImpl implements IReservationService {
             throw new OverlappingReservationException(
                     "The selected space is already reserved during the requested period.");
         }
+        reservation = reservationRepository.save(reservation);
+        boolean paymentApproved = paymentService.validatePayment(reservation);
+        if(paymentApproved) reservation.setStatus(ReservationStatus.CONFIRMED);
 
+        else reservation.setStatus(ReservationStatus.PENDING_PAYMENT);
 
         reservation = reservationRepository.save(reservation);
+
+        if (reservation.getStatus() == ReservationStatus.CONFIRMED) {
+
+            // Observer design pattern applied
+            eventPublisher.publishEvent(
+                    new ReservationConfirmedEvent(reservation));
+
+        }
 
         return reservationMapper.toResponse(reservation);
     }
@@ -133,16 +150,6 @@ public class ReservationServiceImpl implements IReservationService {
                 .orElseThrow(() -> new ObjectNotFoundException("Reservation not found"));
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        /*boolean isAdmin = authentication.getAuthorities()
-                .stream()
-                .anyMatch(a -> a.getAuthority().equals("ADMIN"));
-
-        if (!isAdmin &&
-                !reservation.getUser().getUsername().equals(authentication.getName())) {
-
-            throw new IllegalArgumentException("You are not allowed to cancel this reservation.");
-        }*/
 
         if (reservation.getStatus() == ReservationStatus.CANCELLED) {
             throw new IllegalArgumentException("Reservation is already cancelled.");
