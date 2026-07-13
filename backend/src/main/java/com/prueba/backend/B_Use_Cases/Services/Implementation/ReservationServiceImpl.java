@@ -134,7 +134,7 @@ public class ReservationServiceImpl implements IReservationService {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        boolean isAdmin = authentication.getAuthorities()
+        /*boolean isAdmin = authentication.getAuthorities()
                 .stream()
                 .anyMatch(a -> a.getAuthority().equals("ADMIN"));
 
@@ -142,7 +142,7 @@ public class ReservationServiceImpl implements IReservationService {
                 !reservation.getUser().getUsername().equals(authentication.getName())) {
 
             throw new IllegalArgumentException("You are not allowed to cancel this reservation.");
-        }
+        }*/
 
         if (reservation.getStatus() == ReservationStatus.CANCELLED) {
             throw new IllegalArgumentException("Reservation is already cancelled.");

@@ -20,7 +20,7 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(ObjectNotFoundException.class)
     public ResponseEntity<Error> invalidPassException(ObjectNotFoundException exception){
-        Error error = buildError("440", "Something happened wrong", "unfortunately something happened wrong, try again");
+        Error error = buildError("500", "Something happened wrong", "unfortunately something happened wrong, try again");
         log.error("Error: {}", exception.getMessage());
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
@@ -28,7 +28,7 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(OverlappingReservationException.class)
     public ResponseEntity<Error> overlappingReservationException(OverlappingReservationException exception){
-        Error error = buildError("440", "Something happened wrong", "unfortunately something happened wrong, try again");
+        Error error = buildError("500", "Something happened wrong", "unfortunately something happened wrong, try again");
         log.error("Error: {}", exception.getMessage());
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
