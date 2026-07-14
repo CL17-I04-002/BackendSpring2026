@@ -37,7 +37,7 @@ public class ReservationServiceImpl implements IReservationService {
     private final SpaceRepository spaceRepository;
     private final UserRepository userRepository;
     private final IPaymentService paymentService;
-    private ApplicationEventPublisher eventPublisher;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Override
     @Transactional
@@ -84,7 +84,7 @@ public class ReservationServiceImpl implements IReservationService {
         }
         reservation = reservationRepository.save(reservation);
         boolean paymentApproved = paymentService.validatePayment(reservation);
-        if(paymentApproved) reservation.setStatus(ReservationStatus.CONFIRMED);
+        if (paymentApproved) reservation.setStatus(ReservationStatus.CONFIRMED);
 
         else reservation.setStatus(ReservationStatus.PENDING_PAYMENT);
 
@@ -167,13 +167,14 @@ public class ReservationServiceImpl implements IReservationService {
         return reservationMapper.toResponse(reservation);
     }
 
-    private Long calculateHours(Reservation request){
+    private Long calculateHours(Reservation request) {
         return Duration.between(
                         request.getStartDate(),
                         request.getEndDate())
                 .toHours();
 
     }
+
     private BigDecimal calculateAmount(Reservation reservation) {
 
         return reservation.getSpace()
