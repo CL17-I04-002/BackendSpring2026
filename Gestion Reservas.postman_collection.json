@@ -1,0 +1,435 @@
+{
+  "info": {
+    "_postman_id": "cc901ff1-1bf3-426a-b864-4ac1f0f185f8",
+    "name": "Gestion Reservas",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "12090717"
+  },
+  "item": [
+    {
+      "name": "create user",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\" : \"danKaos\",\r\n    \"name\" : \"daniel larin\",\r\n    \"password\" : \"12345678\",\r\n    \"repeatedPassword\" : \"12345678\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/v1/user",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "user"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Authenticate",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\" : \"danKaos\",\r\n    \"password\" : \"12345678\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/v1/auth/authenticate",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "auth",
+            "authenticate"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Space",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYW5LYW9zIiwiaWF0IjoxNzgzODk5NTM2LCJleHAiOjE3ODM5MDEzMzYsInJvbGUiOiJBRE1JTiIsIm5hbWUiOiJkYW5pZWwgbGFyaW4iLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiQ1JFQVRFX1VTRVIifSx7ImF1dGhvcml0eSI6IkFVVEhFTlRJQ0FURSJ9LHsiYXV0aG9yaXR5IjoiQ1JFQVRFX1NQQUNFIn0seyJhdXRob3JpdHkiOiJHRVRfQUxMX1NQQUNFUyJ9LHsiYXV0aG9yaXR5IjoiR0VUX1NQQUNFIn0seyJhdXRob3JpdHkiOiJVUERBVEVfU1BBQ0UifSx7ImF1dGhvcml0eSI6IkRFTEVURV9TUEFDRSJ9LHsiYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XX0.OUqa47y1nXCw8sP1cc-Mspm8_gbO9ALd2SGhYRQlgm8",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Sala Alpha\",\r\n  \"type\": \"MEETING_ROOM\",\r\n  \"capacity\": 10,\r\n  \"location\": \"Edificio Torre Futura, Nivel 5, San Salvador\",\r\n  \"hourlyRate\": 25.50\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/v1/spaces",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "spaces"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Spaces",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYW5LYW9zIiwiaWF0IjoxNzgzOTAwMjEyLCJleHAiOjE3ODM5MDIwMTIsInJvbGUiOiJBRE1JTiIsIm5hbWUiOiJkYW5pZWwgbGFyaW4iLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiQ1JFQVRFX1VTRVIifSx7ImF1dGhvcml0eSI6IkFVVEhFTlRJQ0FURSJ9LHsiYXV0aG9yaXR5IjoiQ1JFQVRFX1NQQUNFIn0seyJhdXRob3JpdHkiOiJHRVRfQUxMX1NQQUNFUyJ9LHsiYXV0aG9yaXR5IjoiR0VUX1NQQUNFIn0seyJhdXRob3JpdHkiOiJVUERBVEVfU1BBQ0UifSx7ImF1dGhvcml0eSI6IkRFTEVURV9TUEFDRSJ9LHsiYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XX0.WX-F1r6cCUvGrlGaL66zl_C8rF1j6bExyqE8vxa3R3c",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/v1/spaces",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "spaces"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Space",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYW5LYW9zIiwiaWF0IjoxNzgzOTAwMjEyLCJleHAiOjE3ODM5MDIwMTIsInJvbGUiOiJBRE1JTiIsIm5hbWUiOiJkYW5pZWwgbGFyaW4iLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiQ1JFQVRFX1VTRVIifSx7ImF1dGhvcml0eSI6IkFVVEhFTlRJQ0FURSJ9LHsiYXV0aG9yaXR5IjoiQ1JFQVRFX1NQQUNFIn0seyJhdXRob3JpdHkiOiJHRVRfQUxMX1NQQUNFUyJ9LHsiYXV0aG9yaXR5IjoiR0VUX1NQQUNFIn0seyJhdXRob3JpdHkiOiJVUERBVEVfU1BBQ0UifSx7ImF1dGhvcml0eSI6IkRFTEVURV9TUEFDRSJ9LHsiYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XX0.WX-F1r6cCUvGrlGaL66zl_C8rF1j6bExyqE8vxa3R3c",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/v1/spaces/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "spaces",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Space",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYW5LYW9zIiwiaWF0IjoxNzgzOTAwMjEyLCJleHAiOjE3ODM5MDIwMTIsInJvbGUiOiJBRE1JTiIsIm5hbWUiOiJkYW5pZWwgbGFyaW4iLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiQ1JFQVRFX1VTRVIifSx7ImF1dGhvcml0eSI6IkFVVEhFTlRJQ0FURSJ9LHsiYXV0aG9yaXR5IjoiQ1JFQVRFX1NQQUNFIn0seyJhdXRob3JpdHkiOiJHRVRfQUxMX1NQQUNFUyJ9LHsiYXV0aG9yaXR5IjoiR0VUX1NQQUNFIn0seyJhdXRob3JpdHkiOiJVUERBVEVfU1BBQ0UifSx7ImF1dGhvcml0eSI6IkRFTEVURV9TUEFDRSJ9LHsiYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XX0.WX-F1r6cCUvGrlGaL66zl_C8rF1j6bExyqE8vxa3R3c",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Sala Alpha\",\r\n  \"type\": \"MEETING_ROOM\",\r\n  \"capacity\": 15,\r\n  \"location\": \"Edificio Insigne, San Salvador\",\r\n  \"hourlyRate\": 80.50\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/v1/spaces/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "spaces",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Space",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYW5LYW9zIiwiaWF0IjoxNzgzOTAwMjEyLCJleHAiOjE3ODM5MDIwMTIsInJvbGUiOiJBRE1JTiIsIm5hbWUiOiJkYW5pZWwgbGFyaW4iLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiQ1JFQVRFX1VTRVIifSx7ImF1dGhvcml0eSI6IkFVVEhFTlRJQ0FURSJ9LHsiYXV0aG9yaXR5IjoiQ1JFQVRFX1NQQUNFIn0seyJhdXRob3JpdHkiOiJHRVRfQUxMX1NQQUNFUyJ9LHsiYXV0aG9yaXR5IjoiR0VUX1NQQUNFIn0seyJhdXRob3JpdHkiOiJVUERBVEVfU1BBQ0UifSx7ImF1dGhvcml0eSI6IkRFTEVURV9TUEFDRSJ9LHsiYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XX0.WX-F1r6cCUvGrlGaL66zl_C8rF1j6bExyqE8vxa3R3c",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/v1/spaces/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "spaces",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Reservation",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqdWFuam8iLCJpYXQiOjE3ODM5NjIxNjMsImV4cCI6MTc4Mzk2Mzk2Mywicm9sZSI6IlVTRVIiLCJuYW1lIjoiSnVhbiBQZXJleiIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJHRVRfU1BBQ0UifSx7ImF1dGhvcml0eSI6IkNSRUFURV9SRVNFUlZBVElPTiJ9LHsiYXV0aG9yaXR5IjoiR0VUX01ZX1JFU0VSVkFUSU9OIn0seyJhdXRob3JpdHkiOiJST0xFX1VTRVIifV19.wyYxM7ud98WufvIzjddaebc0QO433q4zRtWBQCqaunM",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"spaceId\": 2,\r\n  \"startDate\": \"2026-07-15T10:00:00\",\r\n  \"endDate\": \"2026-07-15T11:00:00\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/v1/reservations",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "reservations"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Reservation By Id",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqdWFuam8iLCJpYXQiOjE3ODM5NjAwNjYsImV4cCI6MTc4Mzk2MTg2Niwicm9sZSI6IlVTRVIiLCJuYW1lIjoiSnVhbiBQZXJleiIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJHRVRfU1BBQ0UifSx7ImF1dGhvcml0eSI6IkNSRUFURV9SRVNFUlZBVElPTiJ9LHsiYXV0aG9yaXR5IjoiQ1JFQVRFX1JFU0VSVkFUSU9OIn0seyJhdXRob3JpdHkiOiJHRVRfQUxMX1JFU0VSVkFUSU9OUyJ9LHsiYXV0aG9yaXR5IjoiR0VUX01ZX1JFU0VSVkFUSU9OIn0seyJhdXRob3JpdHkiOiJST0xFX1VTRVIifV19.Ryz4t6ZcTj-HZHkp3u-GJktnLhQf_yj6q9yZ9uDD7cE",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/v1/reservations/my",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "reservations",
+            "my"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Reservations",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYW5LYW9zIiwiaWF0IjoxNzgzOTYwNDAwLCJleHAiOjE3ODM5NjIyMDAsInJvbGUiOiJBRE1JTiIsIm5hbWUiOiJkYW5pZWwgbGFyaW4iLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiQ1JFQVRFX1VTRVIifSx7ImF1dGhvcml0eSI6IkFVVEhFTlRJQ0FURSJ9LHsiYXV0aG9yaXR5IjoiQ1JFQVRFX1NQQUNFIn0seyJhdXRob3JpdHkiOiJHRVRfQUxMX1NQQUNFUyJ9LHsiYXV0aG9yaXR5IjoiR0VUX1NQQUNFIn0seyJhdXRob3JpdHkiOiJVUERBVEVfU1BBQ0UifSx7ImF1dGhvcml0eSI6IkRFTEVURV9TUEFDRSJ9LHsiYXV0aG9yaXR5IjoiQ1JFQVRFX1JFU0VSVkFUSU9OIn0seyJhdXRob3JpdHkiOiJHRVRfUkVTRVJWQVRJT04ifSx7ImF1dGhvcml0eSI6IkNBTkNFTF9SRVNFUlZBVElPTiJ9LHsiYXV0aG9yaXR5IjoiR0VUX0FMTF9SRVNFUlZBVElPTlMifSx7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV19.k7gfOTLhiq00KZ1XRuIlnV4ucxrdO2XGYXFynSJoVUw",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/v1/reservations",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "reservations"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Cancel Operation",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkYW5LYW9zIiwiaWF0IjoxNzgzOTYxMjI3LCJleHAiOjE3ODM5NjMwMjcsInJvbGUiOiJBRE1JTiIsIm5hbWUiOiJkYW5pZWwgbGFyaW4iLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiQ1JFQVRFX1VTRVIifSx7ImF1dGhvcml0eSI6IkFVVEhFTlRJQ0FURSJ9LHsiYXV0aG9yaXR5IjoiQ1JFQVRFX1NQQUNFIn0seyJhdXRob3JpdHkiOiJHRVRfQUxMX1NQQUNFUyJ9LHsiYXV0aG9yaXR5IjoiR0VUX1NQQUNFIn0seyJhdXRob3JpdHkiOiJVUERBVEVfU1BBQ0UifSx7ImF1dGhvcml0eSI6IkRFTEVURV9TUEFDRSJ9LHsiYXV0aG9yaXR5IjoiQ1JFQVRFX1JFU0VSVkFUSU9OIn0seyJhdXRob3JpdHkiOiJHRVRfUkVTRVJWQVRJT04ifSx7ImF1dGhvcml0eSI6IkNBTkNFTF9SRVNFUlZBVElPTiJ9LHsiYXV0aG9yaXR5IjoiR0VUX0FMTF9SRVNFUlZBVElPTlMifSx7ImF1dGhvcml0eSI6IlJPTEVfQURNSU4ifV19.Uc5Kk7olcgYNuEbSQDQdj5hHUiTTRqqQlz5ZAhtJ9FY",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/v1/reservations/5/cancel",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "v1",
+            "reservations",
+            "5",
+            "cancel"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Perform external payment",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8081/mock-payment",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8081",
+          "path": [
+            "mock-payment"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
