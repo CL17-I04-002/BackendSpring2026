@@ -269,7 +269,19 @@ mvn clean package
 
 ---
 
-## 3. Levantar los contenedores
+## 3. Construir el proyecto
+
+Crear una base de datos llamada GestionReserva.
+Abrir pgAdmin.
+Ir a Tools → Query Tool.
+Abrir el archivo GestionReserva.sql incluido en el proyecto.
+Ejecutar el script.
+Verificar que las tablas y los datos se hayan creado correctamente.
+Levantar la aplicación con Docker Compose.
+
+---
+
+## 4. Levantar los contenedores
 
 ```bash
 docker compose up --build
@@ -283,7 +295,7 @@ docker-compose up --build
 
 ---
 
-## 4. Verificar los contenedores
+## 5. Verificar los contenedores
 
 ```bash
 docker ps
@@ -296,7 +308,7 @@ Deberían aparecer:
 
 ---
 
-## 5. Detener contenedores
+## 6. Detener contenedores
 
 ```bash
 docker compose down
