@@ -28,5 +28,18 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     List<Reservation> findByUser(Users user);
 
+    @Query("""
+SELECT r
+FROM Reservation r
+WHERE r.space.id = :spaceId
+AND r.status = 'CONFIRMED'
+AND r.startDate >= :start
+AND r.endDate <= :end
+""")
+    List<Reservation> findConfirmedReservations(
+            Long spaceId,
+            LocalDateTime start,
+            LocalDateTime end);
+
 
 }
