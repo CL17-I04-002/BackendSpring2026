@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict kEZ9AvlVSgdeL3eNnIMvh750apoLGofDGryWb95Z57dBSf8C8PqWnryxKpZ7ika
+\restrict jaEKs0QPk8ll1h9EJgU4lhAzd7eJvyRSnr5Mrx2afEzg9znOhbh333ND1Y6ksbU
 
 -- Dumped from database version 17.0
 -- Dumped by pg_dump version 17.0
@@ -261,6 +261,7 @@ COPY public.granted_permission (id, operation_id, role_id) FROM stdin;
 24	16	2
 25	17	1
 26	17	2
+27	21	1
 \.
 
 
@@ -277,6 +278,7 @@ COPY public.module (id, base_path, name) FROM stdin;
 6	/actuator	ACTUATOR
 7	/swagger-ui	SWAGGER
 8	/v3	OPEN_API
+9	/reports	REPORTS
 \.
 
 
@@ -304,6 +306,8 @@ t	17	8	GET	OPEN_API_DOCS	/api-docs.*
 t	16	7	GET	SWAGGER	/index.html
 t	18	7	GET	SWAGGER	/error
 t	19	8	GET	OPEN_API_DOCS_ERROR	/error
+t	20	7	GET	SWAGGER_RESOURCES	/.*
+f	21	9	GET	REPORT	/occupancy
 \.
 
 
@@ -313,18 +317,24 @@ t	19	8	GET	OPEN_API_DOCS_ERROR	/error
 
 COPY public.reservations (id, created_at, end_date, start_date, status, total_amount, total_hours, updated_at, space_id, user_id) FROM stdin;
 5	2026-07-13 00:38:57.446466	2026-07-15 11:00:00	2026-07-15 10:00:00	CANCELLED	25.50	1	2026-07-13 11:01:47.437183	2	2
-6	2026-07-13 11:03:31.742099	2026-07-15 11:00:00	2026-07-15 10:00:00	PENDING_PAYMENT	25.50	1	\N	2	2
-7	2026-07-13 16:15:42.206441	2026-07-15 12:00:00	2026-07-15 11:00:00	CONFIRMED	25.50	1	\N	2	2
-8	2026-07-13 21:42:06.383265	2026-07-15 13:00:00	2026-07-15 12:00:00	PENDING_PAYMENT	25.50	1	\N	2	2
-9	2026-07-13 21:49:19.995241	2026-07-15 14:00:00	2026-07-15 13:00:00	PENDING_PAYMENT	25.50	1	\N	2	2
-10	2026-07-13 21:59:04.021933	2026-07-15 15:00:00	2026-07-15 14:00:00	PENDING_PAYMENT	25.50	1	\N	2	2
-11	2026-07-13 22:07:00.484878	2026-07-15 16:00:00	2026-07-15 15:00:00	PENDING_PAYMENT	25.50	1	\N	2	2
-12	2026-07-13 22:19:22.36951	2026-07-15 17:00:00	2026-07-15 16:00:00	PENDING_PAYMENT	25.50	1	\N	2	2
-13	2026-07-13 22:32:02.489582	2026-07-15 18:00:00	2026-07-15 17:00:00	PENDING_PAYMENT	25.50	1	\N	2	2
-14	2026-07-13 22:34:31.281823	2026-07-15 19:00:00	2026-07-15 18:00:00	PENDING_PAYMENT	25.50	1	\N	2	2
-15	2026-07-13 22:39:35.128819	2026-07-15 20:00:00	2026-07-15 19:00:00	PENDING_PAYMENT	25.50	1	\N	2	2
-16	2026-07-13 22:41:30.003417	2026-07-15 21:00:00	2026-07-15 20:00:00	PENDING_PAYMENT	25.50	1	\N	2	2
-17	2026-07-13 22:43:10.721109	2026-07-15 22:00:00	2026-07-15 21:00:00	CONFIRMED	25.50	1	\N	2	2
+6	2026-07-13 11:03:31.742099	2026-07-15 11:00:00	2026-07-15 10:00:00	CANCELLED	25.50	1	\N	2	2
+7	2026-07-13 16:15:42.206441	2026-07-15 12:00:00	2026-07-15 11:00:00	CANCELLED	25.50	1	\N	2	2
+8	2026-07-13 21:42:06.383265	2026-07-15 13:00:00	2026-07-15 12:00:00	CANCELLED	25.50	1	\N	2	2
+9	2026-07-13 21:49:19.995241	2026-07-15 14:00:00	2026-07-15 13:00:00	CANCELLED	25.50	1	\N	2	2
+10	2026-07-13 21:59:04.021933	2026-07-15 15:00:00	2026-07-15 14:00:00	CANCELLED	25.50	1	\N	2	2
+11	2026-07-13 22:07:00.484878	2026-07-15 16:00:00	2026-07-15 15:00:00	CANCELLED	25.50	1	\N	2	2
+12	2026-07-13 22:19:22.36951	2026-07-15 17:00:00	2026-07-15 16:00:00	CANCELLED	25.50	1	\N	2	2
+13	2026-07-13 22:32:02.489582	2026-07-15 18:00:00	2026-07-15 17:00:00	CANCELLED	25.50	1	\N	2	2
+14	2026-07-13 22:34:31.281823	2026-07-15 19:00:00	2026-07-15 18:00:00	CANCELLED	25.50	1	\N	2	2
+15	2026-07-13 22:39:35.128819	2026-07-15 20:00:00	2026-07-15 19:00:00	CANCELLED	25.50	1	\N	2	2
+16	2026-07-13 22:41:30.003417	2026-07-15 21:00:00	2026-07-15 20:00:00	CANCELLED	25.50	1	\N	2	2
+17	2026-07-13 22:43:10.721109	2026-07-15 22:00:00	2026-07-15 21:00:00	CANCELLED	25.50	1	\N	2	2
+18	2026-07-14 21:40:09.85714	2026-07-15 23:00:00	2026-07-15 22:00:00	CANCELLED	25.50	1	\N	2	2
+20	2026-07-14 21:46:14.469368	2026-08-15 23:00:00	2026-08-15 12:00:00	CANCELLED	280.50	11	\N	2	2
+21	2026-07-14 21:51:50.407393	2026-08-15 14:00:00	2026-08-15 13:00:00	CANCELLED	25.50	1	2026-07-14 21:56:20.169345	2	2
+22	2026-07-17 21:34:17.453078	2026-08-15 14:00:00	2026-08-15 13:00:00	CANCELLED	25.50	1	2026-07-17 21:49:36.313034	2	1
+23	2026-07-17 21:53:08.418662	2026-08-15 14:00:00	2026-08-15 13:00:00	CONFIRMED	25.50	1	\N	2	1
+24	2026-07-19 22:55:01.746568	2026-08-18 06:00:00	2026-08-18 05:00:00	CONFIRMED	25.50	1	\N	2	2
 \.
 
 
@@ -361,28 +371,28 @@ t	2	2	Juan Perez	$2a$10$Xe6JBZEvbrZn1t8bZsxcpe0Na/Q9HrQf8wYp1Yw5LMN2ui2HYGxMq	ju
 -- Name: granted_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.granted_permission_id_seq', 26, true);
+SELECT pg_catalog.setval('public.granted_permission_id_seq', 27, true);
 
 
 --
 -- Name: module_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.module_id_seq', 8, true);
+SELECT pg_catalog.setval('public.module_id_seq', 9, true);
 
 
 --
 -- Name: operation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.operation_id_seq', 19, true);
+SELECT pg_catalog.setval('public.operation_id_seq', 21, true);
 
 
 --
 -- Name: reservations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.reservations_id_seq', 17, true);
+SELECT pg_catalog.setval('public.reservations_id_seq', 24, true);
 
 
 --
@@ -396,7 +406,7 @@ SELECT pg_catalog.setval('public.role_id_seq', 2, true);
 -- Name: spaces_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.spaces_id_seq', 2, true);
+SELECT pg_catalog.setval('public.spaces_id_seq', 3, true);
 
 
 --
@@ -530,5 +540,5 @@ ALTER TABLE ONLY public.operation
 -- PostgreSQL database dump complete
 --
 
-\unrestrict kEZ9AvlVSgdeL3eNnIMvh750apoLGofDGryWb95Z57dBSf8C8PqWnryxKpZ7ika
+\unrestrict jaEKs0QPk8ll1h9EJgU4lhAzd7eJvyRSnr5Mrx2afEzg9znOhbh333ND1Y6ksbU
 
