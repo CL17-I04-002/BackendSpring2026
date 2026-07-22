@@ -24,7 +24,7 @@ public class Space {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
-    @Size(min = 5, max = 20)
+    @Size(min = 5, max = 50)
     private String name;
     @Enumerated(EnumType.STRING)
     @NotNull
